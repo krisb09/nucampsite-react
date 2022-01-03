@@ -1,13 +1,55 @@
 import React from 'react';
 import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle, Breadcrumb, BreadcrumbItem
+  Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody
 } from "reactstrap";
+import { LocalForm, Control } from "react-redux-form";
 import { Link } from "react-router-dom";
 
+class CommentForm extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state={
+      isModalOpen: false,
+    };
+    this.toggleModal = this.toggleModal.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  toggleModal() {
+    this.setState({ isModalOpen: !this.state.isModalOpen });
+  }
+
+  handleSubmit(values) {
+    this.toggleModal();
+    this.props.addComment(
+      this.props.campsiteId,
+      values.rating,
+      values.author,
+      values.text
+    );
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <Button className="fa fa-pencil" outline>
+          Submit Comment
+        </Button>
+
+        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+          <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
+          <ModalBody>
+            <LocalForm onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="rating">Rating</label>
+              </div>
+            </LocalForm>
+          </ModalBody>
+        </Modal>
+      </React.Fragment>
+    );
+  }
+}
      
 function RenderCampsite({campsite}) {
             return (
@@ -39,9 +81,8 @@ function RenderComments({comments}){
                                 </p>
                             </div>
                         );
-                    })
-                }
-                
+                    })}
+                <CommentForm />
             </div>
         );
     }

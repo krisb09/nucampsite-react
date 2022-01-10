@@ -1,12 +1,27 @@
 import React, { Component } from "react";
-import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Jumbotron, Button, Modal, ModalHeader, Form, FormGroup, Input, Label, ModalBody } from "reactstrap";
-import { NavLink } from 'react-router-dom';
+import {
+  Nav,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+  Collapse,
+  NavItem,
+  Jumbotron,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+} from "reactstrap";
+import { NavLink } from "react-router-dom";
 
 class Header extends Component {
   constructor(props) {
     super(props);
 
-    this.toggleNav = this.toggleNav.bind(this);
     this.state = {
       isNavOpen: false,
       isModalOpen: false,
@@ -30,11 +45,11 @@ class Header extends Component {
   }
 
   handleLogin(event) {
-     alert(
-       `Username: ${this.username.value} Password: ${this.password.value} Remember: ${this.remember.checked}`
-     );
-     this.toggleModal();
-     event.preventDefault();
+    alert(
+      `Username: ${this.username.value} Password: ${this.password.value} Remember: ${this.remember.checked}`
+    );
+    this.toggleModal();
+    event.preventDefault();
   }
 
   render() {
@@ -58,7 +73,7 @@ class Header extends Component {
                 src="/assets/images/logo.png"
                 height="30"
                 width="30"
-                alt="Nucamp Logo"
+                alt="NuCamp Logo"
               />
             </NavbarBrand>
             <NavbarToggler onClick={this.toggleNav} />
@@ -66,26 +81,22 @@ class Header extends Component {
               <Nav navbar>
                 <NavItem>
                   <NavLink className="nav-link" to="/home">
-                    <i className="fa fa-home fa-lg" />
-                    Home
+                    <i className="fa fa-home fa-lg" /> Home
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link" to="/directory">
-                    <i className="fa fa-list fa-lg" />
-                    Directory
+                    <i className="fa fa-list fa-lg" /> Directory
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link" to="/aboutus">
-                    <i className="fa fa-info fa-lg" />
-                    About
+                    <i className="fa fa-info fa-lg" /> About
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link" to="/contactus">
-                    <i className="fa fa-address-card fa-lg" />
-                    Contact Us
+                    <i className="fa fa-address-card fa-lg" /> Contact Us
                   </NavLink>
                 </NavItem>
               </Nav>

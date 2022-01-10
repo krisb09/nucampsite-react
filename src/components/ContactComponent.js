@@ -1,7 +1,14 @@
 import React, { Component } from "react";
-import { Breadcrumb, BreadcrumbItem, Button, Label, Input, Row, Col } from "reactstrap";
-import { Control, Form, Errors} from 'react-redux-form';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  Button,
+  Label,
+  Col,
+  Row,
+} from "reactstrap";
 import { Link } from "react-router-dom";
+import { Control, Form, Errors } from "react-redux-form";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -33,15 +40,10 @@ class Contact extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleBlur = (field) => () => {
-    this.setState({
-      touched: { ...this.state.touched, [field]: true },
-    });
-  };
-
   handleSubmit(values) {
-    console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
+    console.log("Current state is: " + JSON.stringify(values));
+    alert("Current state is: " + JSON.stringify(values));
+    this.props.postFeedback(values);
     this.props.resetFeedbackForm();
   }
 
@@ -104,11 +106,10 @@ class Contact extends Component {
                 <Col md={10}>
                   <Control.text
                     model=".firstName"
-                    className="form-control"
-                    type="text"
                     id="firstName"
                     name="firstName"
                     placeholder="First Name"
+                    className="form-control"
                     validators={{
                       required,
                       minLength: minLength(2),
@@ -135,11 +136,10 @@ class Contact extends Component {
                 <Col md={10}>
                   <Control.text
                     model=".lastName"
-                    className="form-control"
-                    type="text"
                     id="lastName"
                     name="lastName"
                     placeholder="Last Name"
+                    className="form-control"
                     validators={{
                       required,
                       minLength: minLength(2),
@@ -148,7 +148,7 @@ class Contact extends Component {
                   />
                   <Errors
                     className="text-danger"
-                    model=".firstName"
+                    model=".lastName"
                     show="touched"
                     component="div"
                     messages={{
@@ -166,11 +166,10 @@ class Contact extends Component {
                 <Col md={10}>
                   <Control.text
                     model=".phoneNum"
-                    className="form-control"
-                    type="tel"
                     id="phoneNum"
                     name="phoneNum"
                     placeholder="Phone number"
+                    className="form-control"
                     validators={{
                       required,
                       minLength: minLength(10),
@@ -199,11 +198,10 @@ class Contact extends Component {
                 <Col md={10}>
                   <Control.text
                     model=".email"
-                    className="form-control"
-                    type="email"
                     id="email"
                     name="email"
                     placeholder="Email"
+                    className="form-control"
                     validators={{
                       required,
                       validEmail,
@@ -226,11 +224,9 @@ class Contact extends Component {
                   <div className="form-check">
                     <Label check>
                       <Control.checkbox
-                        model=".form-check"
-                        className="form-check-input"
-                        type="checkbox"
+                        model=".agree"
                         name="agree"
-                        checked={this.state.agree}
+                        className="form-check-input"
                       />{" "}
                       <strong>May we contact you?</strong>
                     </Label>
@@ -239,10 +235,8 @@ class Contact extends Component {
                 <Col md={4}>
                   <Control.select
                     model=".contactType"
-                    className="form-control"
-                    type="select"
                     name="contactType"
-                    value={this.state.contactType}
+                    className="form-control"
                   >
                     <option>By Phone</option>
                     <option>By Email</option>
@@ -256,11 +250,10 @@ class Contact extends Component {
                 <Col md={10}>
                   <Control.textarea
                     model=".feedback"
-                    className="form-control"
-                    type="textarea"
                     id="feedback"
                     name="feedback"
                     rows="12"
+                    className="form-control"
                   />
                 </Col>
               </Row>
